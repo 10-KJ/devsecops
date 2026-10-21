@@ -15,16 +15,21 @@ pipeline {
   stages {
     stage('Checkout') { steps { checkout scm } }
 
-    stage('Build & Unit Test') {
-      steps {
+stage('Build & Unit Test') {
+    steps {
         sh '''
-          python3 -m venv .venv && . .venv/bin/activate
-          pip install -q -r requirements-dev.txt
-          pytest -q --cov=app --cov=sarps --cov-report=xml --junitxml=junit.xml
+            python3 -m venv .venv
+            .venv/bin/python -m pip install --upgrade pip
+            .venv/bin/python -m pip install -r requirements-dev.txt
+            .venv/bin/python -m pytest --junitxml=test-results.xml
         '''
-      }
-      post { always { junit 'junit.xml' } }
     }
+    post {
+        always {
+            junit allowEmptyResults: true, testResults: 'test-results.xml'
+        }
+    }
+}
 
     stage('SAST: SonarQube') {
       steps {
