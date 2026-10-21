@@ -1,9 +1,0 @@
-{% extends "base.html" %}{% block content %}
-<h1>Ethics, privacy &amp; limitations</h1>
-<div class="card"><ul class="plain">
-<li><b>Data privacy:</b> student IDs are salted-hashed on ingestion; no names or contact details are needed; uploads are processed in memory and not stored.</li>
-<li><b>Fairness:</b> only academic-behaviour features are used. Gender, caste, religion, income and location are deliberately excluded.</li>
-<li><b>Transparency:</b> every flag lists plain-language reasons; the model is interpretable (logistic regression).</li>
-<li><b>Human in the loop:</b> output is a support signal, never a grade, label or disciplinary input.</li>
-<li><b>Limitations:</b> the prototype is trained on synthetic data. Real use needs validation on local data, bias audits, periodic re-training and consent.</li></ul></div>
-{% endblock %}
