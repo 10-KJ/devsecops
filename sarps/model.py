@@ -1,4 +1,5 @@
 """Module 3 - Model training, evaluation and persistence."""
+from pathlib import Path
 import joblib
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
@@ -33,6 +34,7 @@ def train(df, seed=42):
 
 
 def save(model, path="models/risk_model.joblib"):
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, path)
 
 
