@@ -1,0 +1,14 @@
+:root{--navy:#1F3A5F;--teal:#2A9D8F;--amber:#E9A23B;--red:#D1495B;--bg:#F3F6FA;--ink:#1B2733;--mute:#5B6B7B}
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:1050px;margin:0 auto;padding:0 20px}header{background:var(--navy)}header .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
+.brand{color:#fff;font-weight:700;font-size:20px;text-decoration:none}nav a{color:#cfe0f1;margin-left:20px;text-decoration:none}nav a:hover{color:#fff}
+h1{color:var(--navy);margin:24px 0 4px}h2{color:var(--navy);margin:0 0 10px;font-size:19px}.muted{color:var(--mute);font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}.kpi{background:#fff;border-radius:10px;padding:14px 18px;border-left:5px solid var(--navy);box-shadow:0 1px 3px #0001}
+.kpi span{display:block;color:var(--mute);font-size:14px}.kpi b{font-size:30px}.kpi.high{border-color:var(--red)}.kpi.med{border-color:var(--amber)}.kpi.low{border-color:var(--teal)}
+.card{background:#fff;border-radius:10px;padding:18px 20px;margin:16px 0;box-shadow:0 1px 3px #0001}.err{border-left:5px solid var(--red)}
+button,.chip{background:var(--navy);color:#fff;border:0;border-radius:6px;padding:8px 14px;cursor:pointer;font:inherit}.chip{background:#dfe7f0;color:var(--ink);padding:4px 12px;margin-left:6px}.chip.on{background:var(--teal);color:#fff}
+input[type=file]{margin-right:10px}table{width:100%;border-collapse:collapse;margin-top:10px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e3e9f0;vertical-align:top}th{color:var(--mute);font-size:13px;text-transform:uppercase}
+.bar{display:inline-block;width:90px;height:8px;background:#e3e9f0;border-radius:4px;margin-right:8px;vertical-align:middle}.bar i{display:block;height:100%;background:var(--navy);border-radius:4px}
+.pill{padding:2px 10px;border-radius:12px;color:#fff;font-size:13px}.pill.high{background:var(--red)}.pill.medium{background:var(--amber)}.pill.low{background:var(--teal)}
+details summary{cursor:pointer;color:var(--navy)}ul{margin:4px 0 8px;padding-left:20px}ul.plain li{margin-bottom:8px}footer{color:var(--mute);font-size:13px;padding:24px 20px}
+@media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}

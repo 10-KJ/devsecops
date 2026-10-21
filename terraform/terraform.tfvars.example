@@ -1,0 +1,4 @@
+# Copy to terraform.tfvars (git-ignored) and fill in. Do NOT commit real values.
+key_name     = "my-ec2-keypair"
+admin_cidr   = "203.0.113.10/32"
+docker_image = "YOUR_DOCKERHUB_USERNAME/sarps-web:latest"

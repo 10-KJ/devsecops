@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.env
+coverage.xml
+.coverage
+.scannerwork/
+trivy-*.txt
+trivy-*.json
+models/*.joblib
+models/metrics.json
+data/*.csv
+# Terraform: never commit state or variable values (they can contain secrets)
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+*.pem

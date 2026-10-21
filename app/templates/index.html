@@ -1,0 +1,37 @@
+{% extends "base.html" %}{% block content %}
+<h1>Student Academic Risk Dashboard</h1>
+<p class="muted">Data source: {{ source }}</p>
+<section class="kpis">
+ <div class="kpi"><span>Students analysed</span><b>{{ s.total }}</b></div>
+ <div class="kpi high"><span>High risk</span><b>{{ s.High }}</b></div>
+ <div class="kpi med"><span>Medium risk</span><b>{{ s.Medium }}</b></div>
+ <div class="kpi low"><span>Low risk</span><b>{{ s.Low }}</b></div>
+</section>
+<section class="card">
+ <h2>Analyse your own data</h2>
+ <form method="post" action="/analyze" enctype="multipart/form-data">
+  <input type="file" name="file" accept=".csv" required>
+  <button type="submit">Analyse CSV</button>
+ </form>
+ <p class="muted">Required columns: student_id, attendance_pct, internal_marks, assignment_completion, prev_sem_gpa, lms_logins_per_week, backlogs, study_hours_per_week. Max 1 MB. IDs are hashed; the file is processed in memory and never stored.</p>
+</section>
+<section class="card">
+ <h2>Ranked students</h2>
+ {% if s.total > cap %}<p class="muted">Showing the {{ cap }} highest-risk of {{ s.total }} students.</p>{% endif %}
+ <div class="filters"><label>Show:
+  <button class="chip on" data-level="High">High</button>
+  <button class="chip on" data-level="Medium">Medium</button>
+  <button class="chip" data-level="Low">Low</button></label>
+  <span id="shown" class="muted"></span></div>
+ <table id="tbl"><thead><tr><th>Student (hashed)</th><th>Risk</th><th>Level</th><th>Why flagged &amp; suggested support</th></tr></thead><tbody>
+ {% for r in rows %}<tr data-level="{{ r.risk_level }}"{% if r.risk_level == 'Low' %} hidden{% endif %}>
+  <td><code>{{ r.student_id }}</code></td>
+  <td><div class="bar"><i style="width:{{ (r.risk_probability*100)|round|int }}%"></i></div>{{ (r.risk_probability*100)|round|int }}%</td>
+  <td><span class="pill {{ r.risk_level|lower }}">{{ r.risk_level }}</span></td>
+  <td>{% if r.reasons %}<details><summary>{{ r.reasons|length }} indicator(s)</summary>
+   <b>Reasons</b><ul>{% for x in r.reasons %}<li>{{ x }}</li>{% endfor %}</ul>
+   <b>Suggested support</b><ul>{% for x in r.suggested_actions %}<li>{{ x }}</li>{% endfor %}</ul></details>
+  {% else %}<span class="muted">No indicator triggered</span>{% endif %}</td></tr>{% endfor %}
+ </tbody></table>
+</section>{% endblock %}
+{% block scripts %}<script src="/static/app.js"></script>{% endblock %}
